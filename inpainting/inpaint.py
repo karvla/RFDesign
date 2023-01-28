@@ -201,11 +201,9 @@ def MSAFeaturize_fixbb_inference(seq, params):
 
     return b_seq, b_msa_clust, b_msa_seed, b_msa_extra, b_mask_pos
 
- 
-def main():
-
-    args = get_args()
-
+def inpaint(**kwargs):
+    args = vars(get_args())
+    args.update(kwargs)
     design_params = {'MAXLAT'           : 1,            # dummy val
                      'FIX_BB_MUT_FRAC'  : 0.0}
     
@@ -427,9 +425,9 @@ def main():
                 with open(f'{args.out}_{i_des}_translated_coords.json', "w") as outfile:
                     json.dump(translate_dict, outfile)
             '''
-    sys.exit('Successfully wrote output')
-        
+    print('Successfully wrote output')
+    sys.exit(0)
 
-    
+ 
 if __name__ == '__main__':
-    main()
+    inpaint(get_args());
